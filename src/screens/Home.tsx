@@ -3,6 +3,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import LocationCard from '../components/LocationCard';
+import { wp } from '../utils/ScreenDimension';
 
 const data = [
   {
@@ -27,7 +28,23 @@ const data = [
     para: 'My trip to China started in Beijing, where I stayed in a beautiful hotel called ...',
     profileName: 'Leslie Alexander',
     profile: require('../assets/images/ProfileImg.png'),
-    backgroundImg: require('../assets/images/Cover.png'),
+    backgroundImg: require('../assets/images/Shape.png'),
+  },
+  {
+    id: '04',
+    title: 'Travel to Turkey',
+    para: 'My trip to China started in Beijing, where I stayed in a beautiful hotel called ...',
+    profileName: 'Leslie Alexander',
+    profile: require('../assets/images/ProfileImg.png'),
+    backgroundImg: require('../assets/images/Turkey.png'),
+  },
+  {
+    id: '05',
+    title: 'Travel to Germany',
+    para: 'My trip to China started in Beijing, where I stayed in a beautiful hotel called ...',
+    profileName: 'Leslie Alexander',
+    profile: require('../assets/images/ProfileImg.png'),
+    backgroundImg: require('../assets/images/Mask.png'),
   },
 ];
 
@@ -38,9 +55,10 @@ const Home = () => {
 
   useEffect(() => {
     let interval = setInterval(() => {
-      if (activeIndex === data.length - 1) {
+        
+      if (Math.round(activeIndex) === data.length - 1) {
         flatlistRef.current.scrollToIndex({
-          index: 0,
+          index: 1,
           animation: true,
         });
       } else {
@@ -62,8 +80,16 @@ const Home = () => {
 
   const renderItem = ({item, index}: any) => {
     return (
-      <View>
-        <Image source={item.backgroundImg} style={{height: 392, width: 335}} />
+      <View >
+        <Image source={item.backgroundImg} style={styles.exploreImage} />
+        <View style={styles.exploreTexts}>
+            <Text style={styles.exploreLocation}>{item.title}</Text>
+            <Text style={styles.explorepara}>{item.para}</Text>
+            <View style={styles.exploreProfilediv}>
+                <Image style={styles.explorePofile} source={item.profile}/>
+                <Text style={styles.explorePofileName}>{item.profileName}</Text>
+            </View>
+        </View>
       </View>
     );
   };
@@ -148,10 +174,48 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: '#000',
+    padding: 20
   },
   exploreContainer: {
-    padding: 20,
+    // padding: 20,
   },
+  exploreImage:{
+    height: 392,
+    width: wp(100) - 40,
+    borderRadius: 24,
+    marginHorizontal: 20
+  },
+  exploreTexts:{
+    position: 'absolute',
+    top: 269,
+    left: 44,
+    flexDirection: 'column'
+  },
+  exploreLocation:{
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 6,
+    color: '#fff'
+  },
+  explorepara:{
+    width: 265,
+    fontSize: 14,
+    color: '#fff'
+  },
+  exploreProfilediv:{
+    flexDirection:'row',
+    marginTop: 12
+  },
+  explorePofile:{
+    width:17,
+    height:17,
+    marginRight: 6
+  },
+  explorePofileName:{
+    color: '#fff',
+    fontWeight: '500',
+    fontSize: 15
+  }
 });
 
 export default Home;
