@@ -1,5 +1,6 @@
-import {View, Text, ImageSourcePropType, Image, StyleSheet} from 'react-native';
+import {Text, ImageSourcePropType, Image, StyleSheet} from 'react-native';
 import React from 'react';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 type LocationProps = {
   image: ImageSourcePropType;
@@ -8,10 +9,10 @@ type LocationProps = {
 
 const LocationCard = ({image, location}: LocationProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card}>
       <Image style={styles.image} source={image} />
       <Text style={styles.location}>{location}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

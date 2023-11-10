@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import LocationCard from '../components/LocationCard';
-import { wp } from '../utils/ScreenDimension';
+import {wp} from '../utils/ScreenDimension';
 
 const data = [
   {
@@ -55,7 +55,6 @@ const Home = () => {
 
   useEffect(() => {
     let interval = setInterval(() => {
-        
       if (Math.round(activeIndex) === data.length - 1) {
         flatlistRef.current.scrollToIndex({
           index: 1,
@@ -72,23 +71,23 @@ const Home = () => {
     return () => clearInterval(interval);
   });
 
-  const getItemLayout = (data:any, index: any) => ({
+  const getItemLayout = (data: any, index: any) => ({
     length: screenWidth,
     offset: screenWidth * index, // for first image - 300 * 0 = 0pixels, 300 * 1 = 300, 300*2 = 600
     index: index,
-});
+  });
 
   const renderItem = ({item, index}: any) => {
     return (
-      <View >
+      <View>
         <Image source={item.backgroundImg} style={styles.exploreImage} />
         <View style={styles.exploreTexts}>
-            <Text style={styles.exploreLocation}>{item.title}</Text>
-            <Text style={styles.explorepara}>{item.para}</Text>
-            <View style={styles.exploreProfilediv}>
-                <Image style={styles.explorePofile} source={item.profile}/>
-                <Text style={styles.explorePofileName}>{item.profileName}</Text>
-            </View>
+          <Text style={styles.exploreLocation}>{item.title}</Text>
+          <Text style={styles.explorepara}>{item.para}</Text>
+          <View style={styles.exploreProfilediv}>
+            <Image style={styles.explorePofile} source={item.profile} />
+            <Text style={styles.explorePofileName}>{item.profileName}</Text>
+          </View>
         </View>
       </View>
     );
@@ -97,13 +96,8 @@ const Home = () => {
   const handleScroll = (event: any) => {
     // Get the scroll position
     const scrollPosition = event.nativeEvent.contentOffset.x;
-    console.log({scrollPosition});
-    // Get the index of current active item
 
     const index = scrollPosition / screenWidth;
-
-    console.log({index});
-    // Update the index
 
     setActiveIndex(index);
   };
@@ -174,48 +168,48 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: '#000',
-    padding: 20
+    padding: 20,
   },
   exploreContainer: {
     // padding: 20,
   },
-  exploreImage:{
+  exploreImage: {
     height: 392,
     width: wp(100) - 40,
     borderRadius: 24,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
-  exploreTexts:{
+  exploreTexts: {
     position: 'absolute',
     top: 269,
     left: 44,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
-  exploreLocation:{
+  exploreLocation: {
     fontSize: 24,
     fontWeight: '700',
     marginBottom: 6,
-    color: '#fff'
+    color: '#fff',
   },
-  explorepara:{
+  explorepara: {
     width: 265,
     fontSize: 14,
-    color: '#fff'
+    color: '#fff',
   },
-  exploreProfilediv:{
-    flexDirection:'row',
-    marginTop: 12
+  exploreProfilediv: {
+    flexDirection: 'row',
+    marginTop: 12,
   },
-  explorePofile:{
-    width:17,
-    height:17,
-    marginRight: 6
+  explorePofile: {
+    width: 17,
+    height: 17,
+    marginRight: 6,
   },
-  explorePofileName:{
+  explorePofileName: {
     color: '#fff',
     fontWeight: '500',
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });
 
 export default Home;

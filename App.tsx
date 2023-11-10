@@ -7,7 +7,7 @@ import 'react-native-gesture-handler';
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <SafeAreaView style={{flex:1}}>
+      <SafeAreaView style={{flex: 1}}>
         <MyStack />
       </SafeAreaView>
     </NavigationContainer>
