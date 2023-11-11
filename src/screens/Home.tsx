@@ -187,11 +187,16 @@ const Home = () => {
             />
           </ScrollView>
           <View style={styles.heading}>
-          <Text style={styles.title}>Our Picks</Text>
+          <Text style={styles.title}>Top Cities</Text>
           <Text style={styles.more}>View All</Text>
         </View>
         <ScrollView>
-          <CitiesCard />
+            <CitiesCard
+              image={require('../assets/images/cities.png')}
+              title="Mumbai"
+              location="Jawa timur"
+              rating="4.8"
+            />
         </ScrollView>
         </View>
       ) : (
