@@ -1,4 +1,11 @@
-import {View, StyleSheet, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
@@ -50,32 +57,31 @@ const data = [
   },
 ];
 
-const Home = () => {
+const Home = ({navigation}: any) => {
   const flatlistRef: any = useRef();
   const screenWidth = Dimensions.get('window').width;
   const [activeIndex, setActiveIndex] = useState(0);
   const [choosedLocation, setChoosedLocation] = useState<boolean>(false);
-  const [locationCategory,setLocationCategory] = useState<string>();
+  const [locationCategory, setLocationCategory] = useState<string>('All');
 
   useEffect(() => {
-    if(choosedLocation == false){
-    let interval = setInterval(() => {
-      if (Math.round(activeIndex) === data.length - 1) {
-        flatlistRef.current.scrollToIndex({
-          index: 1,
-          animation: true,
-        });
-      } else {
-        flatlistRef.current.scrollToIndex({
-          index: activeIndex + 1,
-          animation: true,
-        });
-      }
-  
-    }, 2000);
+    if (choosedLocation == false) {
+      let interval = setInterval(() => {
+        if (Math.round(activeIndex) === data.length - 1) {
+          flatlistRef.current.scrollToIndex({
+            index: 1,
+            animation: true,
+          });
+        } else {
+          flatlistRef.current.scrollToIndex({
+            index: activeIndex + 1,
+            animation: true,
+          });
+        }
+      }, 2000);
 
-    return () => clearInterval(interval);
-  }
+      return () => clearInterval(interval);
+    }
   });
 
   const getItemLayout = (data: any, index: any) => ({
@@ -187,17 +193,32 @@ const Home = () => {
             />
           </ScrollView>
           <View style={styles.heading}>
-          <Text style={styles.title}>Top Cities</Text>
-          <Text style={styles.more}>View All</Text>
-        </View>
-        <ScrollView>
+            <Text style={styles.title}>Top Cities</Text>
+            <Text style={styles.more}>View All</Text>
+          </View>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <CitiesCard
               image={require('../assets/images/cities.png')}
               title="Mumbai"
               location="Jawa timur"
               rating="4.8"
+              navigation={navigation}
             />
-        </ScrollView>
+            <CitiesCard
+              image={require('../assets/images/cities.png')}
+              title="Bangalore"
+              location="Jawa timur"
+              rating="4.8"
+              navigation={navigation}
+            />
+            <CitiesCard
+              image={require('../assets/images/cities.png')}
+              title="Chennai"
+              location="Jawa timur"
+              rating="4.8"
+              navigation={navigation}
+            />
+          </ScrollView>
         </View>
       ) : (
         <View>
@@ -313,30 +334,30 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 15,
   },
-  locationDiv:{
-    paddingHorizontal: 20
+  locationDiv: {
+    paddingHorizontal: 20,
   },
-  locationText:{
+  locationText: {
     fontSize: 24,
     fontWeight: '800',
-    color: '#121212'
+    color: '#121212',
   },
-  locationPara:{
+  locationPara: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#6F7789'
+    color: '#6F7789',
   },
-  locationCategory:{
+  locationCategory: {
     flexDirection: 'row',
-    marginVertical: 16
+    marginVertical: 16,
   },
-  locationCategoryText:{
+  locationCategoryText: {
     fontSize: 14,
     color: '#121212',
     fontWeight: '500',
     marginRight: 40,
   },
-  locationCategoryTextActive:{
+  locationCategoryTextActive: {
     fontSize: 14,
     color: '#F36D72',
     fontWeight: '500',

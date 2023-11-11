@@ -1,5 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomNavigator from './BottomNavigation';
+import PlaceDetails from '../screens/PlaceDetails';
 
 export type StackParamList = {
   Bottom: undefined;
@@ -14,6 +15,7 @@ const MyStack = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="Bottom" component={BottomNavigator} />
+      <Stack.Screen name="Place" component={PlaceDetails} />
     </Stack.Navigator>
   );
 };
