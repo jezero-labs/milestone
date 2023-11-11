@@ -1,9 +1,11 @@
-import {View, StyleSheet, Text, Dimensions, Image} from 'react-native';
+import {View, StyleSheet, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import LocationCard from '../components/LocationCard';
 import {wp} from '../utils/ScreenDimension';
+import LocationCategoryCard from '../components/LocationCategoryCard';
+import CitiesCard from '../components/CitiesCard';
 
 const data = [
   {
@@ -52,8 +54,11 @@ const Home = () => {
   const flatlistRef: any = useRef();
   const screenWidth = Dimensions.get('window').width;
   const [activeIndex, setActiveIndex] = useState(0);
+  const [choosedLocation, setChoosedLocation] = useState<boolean>(false);
+  const [locationCategory,setLocationCategory] = useState<string>();
 
   useEffect(() => {
+    if(choosedLocation == false){
     let interval = setInterval(() => {
       if (Math.round(activeIndex) === data.length - 1) {
         flatlistRef.current.scrollToIndex({
@@ -66,9 +71,11 @@ const Home = () => {
           animation: true,
         });
       }
+  
     }, 2000);
 
     return () => clearInterval(interval);
+  }
   });
 
   const getItemLayout = (data: any, index: any) => ({
@@ -108,48 +115,139 @@ const Home = () => {
         name={'Kaushik KC'}
         image={require('../assets/images/ProfileImg.png')}
       />
-      <View>
-        <Text style={styles.subHeading}>Choose location</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <LocationCard
-            image={require('../assets/images/india.png')}
-            location={'India'}
-          />
-          <LocationCard
-            image={require('../assets/images/turkey.png')}
-            location={'Turkey'}
-          />
-          <LocationCard
-            image={require('../assets/images/africa.png')}
-            location={'Africa'}
-          />
-          <LocationCard
-            image={require('../assets/images/italy.png')}
-            location={'Italy'}
-          />
-          <LocationCard
-            image={require('../assets/images/Cover.png')}
-            location={'West'}
-          />
-          <LocationCard
-            image={require('../assets/images/Shape.png')}
-            location={'Germany'}
-          />
+      {choosedLocation ? (
+        <View style={styles.locationDiv}>
+          <View>
+            <Text style={styles.locationText}>Incredible India </Text>
+            <Text style={styles.locationPara}>Let’s Explore Together </Text>
+          </View>
+          <ScrollView
+            style={styles.locationCategory}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}>
+            <TouchableOpacity onPress={() => setLocationCategory('All')}>
+              <Text
+                style={
+                  locationCategory === 'All'
+                    ? styles.locationCategoryTextActive
+                    : styles.locationCategoryText
+                }>
+                All
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setLocationCategory('Popular')}>
+              <Text
+                style={
+                  locationCategory === 'Popular'
+                    ? styles.locationCategoryTextActive
+                    : styles.locationCategoryText
+                }>
+                Popular
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setLocationCategory('Nearby')}>
+              <Text
+                style={
+                  locationCategory === 'Nearby'
+                    ? styles.locationCategoryTextActive
+                    : styles.locationCategoryText
+                }>
+                Nearby
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setLocationCategory('Recomended')}>
+              <Text
+                style={
+                  locationCategory === 'Recomended'
+                    ? styles.locationCategoryTextActive
+                    : styles.locationCategoryText
+                }>
+                Recomended
+              </Text>
+            </TouchableOpacity>
+          </ScrollView>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <LocationCategoryCard
+              image={require('../assets/images/Rectangle.png')}
+              title="Nainital"
+              location="Lumajang, Jawa timur"
+              ratting="4.8"
+            />
+            <LocationCategoryCard
+              image={require('../assets/images/Rectangle.png')}
+              title="Kochi"
+              location="Banyuwangi, Jawa timur"
+              ratting="4.8"
+            />
+            <LocationCategoryCard
+              image={require('../assets/images/Rectangle.png')}
+              title="Nainital"
+              location="Lumajang, Jawa timur"
+              ratting="4.8"
+            />
+          </ScrollView>
+          <View style={styles.heading}>
+          <Text style={styles.title}>Our Picks</Text>
+          <Text style={styles.more}>View All</Text>
+        </View>
+        <ScrollView>
+          <CitiesCard />
         </ScrollView>
-      </View>
-      <View style={styles.exploreContainer}>
-        <Text style={styles.exploreTitle}>Explore Place</Text>
-        <FlatList
-          data={data}
-          ref={flatlistRef}
-          getItemLayout={getItemLayout}
-          keyExtractor={(item: any) => item.id}
-          renderItem={renderItem}
-          horizontal={true}
-          pagingEnabled={true}
-          onScroll={handleScroll}
-        />
-      </View>
+        </View>
+      ) : (
+        <View>
+          <View>
+            <Text style={styles.subHeading}>Choose location</Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <LocationCard
+                image={require('../assets/images/india.png')}
+                location={'India'}
+                setChoosedLocation={setChoosedLocation}
+              />
+              <LocationCard
+                image={require('../assets/images/turkey.png')}
+                location={'Turkey'}
+                setChoosedLocation={setChoosedLocation}
+              />
+              <LocationCard
+                image={require('../assets/images/africa.png')}
+                location={'Africa'}
+                setChoosedLocation={setChoosedLocation}
+              />
+              <LocationCard
+                image={require('../assets/images/italy.png')}
+                location={'Italy'}
+                setChoosedLocation={setChoosedLocation}
+              />
+              <LocationCard
+                image={require('../assets/images/Cover.png')}
+                location={'West'}
+                setChoosedLocation={setChoosedLocation}
+              />
+              <LocationCard
+                image={require('../assets/images/Shape.png')}
+                location={'Germany'}
+                setChoosedLocation={setChoosedLocation}
+              />
+            </ScrollView>
+          </View>
+          <View style={styles.exploreContainer}>
+            <Text style={styles.exploreTitle}>Explore Place</Text>
+            <FlatList
+              data={data}
+              ref={flatlistRef}
+              getItemLayout={getItemLayout}
+              keyExtractor={(item: any) => item.id}
+              renderItem={renderItem}
+              horizontal={true}
+              pagingEnabled={true}
+              onScroll={handleScroll}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -209,6 +307,51 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '500',
     fontSize: 15,
+  },
+  locationDiv:{
+    paddingHorizontal: 20
+  },
+  locationText:{
+    fontSize: 24,
+    fontWeight: '800',
+    color: '#121212'
+  },
+  locationPara:{
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#6F7789'
+  },
+  locationCategory:{
+    flexDirection: 'row',
+    marginVertical: 16
+  },
+  locationCategoryText:{
+    fontSize: 14,
+    color: '#121212',
+    fontWeight: '500',
+    marginRight: 40,
+  },
+  locationCategoryTextActive:{
+    fontSize: 14,
+    color: '#F36D72',
+    fontWeight: '500',
+    marginRight: 40,
+    borderBottomColor: '#F36D72',
+    borderBottomWidth: 2,
+  },
+  heading: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 16,
+  },
+  title: {
+    fontSize: 18,
+    color: '#121212',
+    fontWeight: '600',
+  },
+  more: {
+    color: '#121212',
+    fontSize: 16,
   },
 });
 

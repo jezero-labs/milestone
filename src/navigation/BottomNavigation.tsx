@@ -46,6 +46,7 @@ const BottomNavigator = () => {
         options={{
           tabBarShowLabel: false,
           tabBarLabel: 'Home',
+          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
             <Image
               source={

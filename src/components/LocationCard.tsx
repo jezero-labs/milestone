@@ -2,14 +2,22 @@ import {Text, ImageSourcePropType, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-type LocationProps = {
+interface LocationProps {
   image: ImageSourcePropType;
   location: string;
-};
+  setChoosedLocation: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const LocationCard = ({image, location}: LocationProps) => {
+const LocationCard: React.FC<LocationProps> = ({
+  image,
+  location,
+  setChoosedLocation,
+}) => {
+  const setLocation = () => {
+    setChoosedLocation(true);
+  };
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity onPress={setLocation} style={styles.card}>
       <Image style={styles.image} source={image} />
       <Text style={styles.location}>{location}</Text>
     </TouchableOpacity>
