@@ -1,4 +1,11 @@
-import {View, Text, ImageSourcePropType, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ImageSourcePropType,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import {wp} from '../utils/ScreenDimension';
 
@@ -6,11 +13,19 @@ type MilestoneProps = {
   image: ImageSourcePropType;
   title: string;
   location: string;
+  navigation: any;
 };
 
-const MilestonesCard = ({image, title, location}: MilestoneProps) => {
+const MilestonesCard = ({
+  image,
+  title,
+  location,
+  navigation,
+}: MilestoneProps) => {
   return (
-    <View style={styles.milsestoneCard}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Milestone')}
+      style={styles.milsestoneCard}>
       <Image style={styles.milesrtoneImg} source={image} />
       <View style={styles.milestoneDiv}>
         <View>
@@ -25,7 +40,7 @@ const MilestonesCard = ({image, title, location}: MilestoneProps) => {
         </View>
         <Image source={require('../assets/images/milestonedetail.png')} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

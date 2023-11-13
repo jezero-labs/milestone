@@ -4,7 +4,7 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {wp} from '../utils/ScreenDimension';
 import MilestonesCard from '../components/MilestonesCard';
 
-const PlaceDetails = () => {
+const PlaceDetails = ({navigation}: any) => {
   return (
     <View style={styles.outterContainer}>
       <View style={styles.topNav}>
@@ -64,11 +64,13 @@ const PlaceDetails = () => {
           image={require('../assets/images/milestoneImg.png')}
           title="Night life in Pondy"
           location="Wayanad"
+          navigation={navigation}
         />
         <MilestonesCard
           image={require('../assets/images/milestoneImg.png')}
           title="Night life in Pondy"
           location="Wayanad"
+          navigation={navigation}
         />
       </ScrollView>
     </View>
