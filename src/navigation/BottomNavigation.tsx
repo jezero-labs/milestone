@@ -65,7 +65,7 @@ const BottomNavigator = () => {
                   focused
                     ? {
                         borderBottomWidth: 2,
-                        width: 20,
+                        width: 15,
                         borderBottomColor: '#fff',
                         marginTop: -14,
                       }
@@ -101,7 +101,7 @@ const BottomNavigator = () => {
                   focused
                     ? {
                         borderBottomWidth: 2,
-                        width: 20,
+                        width: 15,
                         borderBottomColor: '#fff',
                         marginTop: -14,
                       }
@@ -138,9 +138,9 @@ const BottomNavigator = () => {
                   focused
                     ? {
                         borderBottomWidth: 2,
-                        width: 20,
+                        width: 18,
                         borderBottomColor: '#fff',
-                        marginTop: -14,
+                        marginTop: -12,
                       }
                     : {
                         height: 0,
@@ -174,9 +174,9 @@ const BottomNavigator = () => {
                   focused
                     ? {
                         borderBottomWidth: 2,
-                        width: 20,
+                        width: 18,
                         borderBottomColor: '#fff',
-                        marginTop: -14,
+                        marginTop: -12,
                       }
                     : {
                         height: 0,
