@@ -22,7 +22,10 @@ const PlaceDetails = ({navigation}: any) => {
           <View>
             <Text style={styles.placeTitle}>Pondicherry</Text>
             <View style={styles.locationDiv}>
-              <Image source={require('../assets/images/explore.png')} />
+              <Image
+                style={styles.exploreIcon}
+                source={require('../assets/images/Explore.png')}
+              />
               <Text style={styles.locationText}>Wayanad</Text>
             </View>
           </View>
@@ -137,6 +140,10 @@ const styles = StyleSheet.create({
     color: '#121212',
     marginVertical: 16,
     fontWeight: '600',
+  },
+  exploreIcon: {
+    height: 14,
+    width: 12,
   },
 });
 
