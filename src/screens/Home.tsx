@@ -116,7 +116,7 @@ const Home = ({navigation}: any) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <WelcomeComponent
         name={'Kaushik KC'}
         image={require('../assets/images/ProfileImg.png')}
@@ -274,7 +274,7 @@ const Home = ({navigation}: any) => {
           </View>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 

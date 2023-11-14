@@ -8,140 +8,143 @@ const Milestone = () => {
   const [milestonCatory, setMilestoneCatory] = useState('All');
 
   return (
-    <View style={styles.outerContainer}>
+    <ScrollView style={styles.outerContainer}>
       <Image
         style={styles.backgroundImg}
         source={require('../assets/images/Italy.png')}
       />
-      <TouchableOpacity style={styles.navMenu}>
-        <Image source={require('../assets/images/arrow.png')} />
-      </TouchableOpacity>
-      <View style={styles.exploreTexts}>
-        <View>
-          <Text style={styles.exploreLocation}>Night life in Pondy</Text>
-          <Text style={styles.explorepara}>
-            My trip to China started in Beijing, where I stayed in a beautiful
-            hotel called ...
+      <View style={styles.innerContainer}>
+        <TouchableOpacity style={styles.navMenu}>
+          <Image source={require('../assets/images/arrow.png')} />
+        </TouchableOpacity>
+        <View style={styles.exploreTexts}>
+          <View>
+            <Text style={styles.exploreLocation}>Night life in Pondy</Text>
+            <Text style={styles.explorepara}>
+              My trip to China started in Beijing, where I stayed in a beautiful
+              hotel called ...
+            </Text>
+            <View style={styles.exploreProfilediv}>
+              <Image
+                style={styles.explorePofile}
+                source={require('../assets/images/ProfileImg.png')}
+              />
+              <Text style={styles.explorePofileName}>Leslie Alexander</Text>
+            </View>
+          </View>
+          <Image source={require('../assets/images/Like.png')} />
+        </View>
+
+        <ScrollView
+          style={styles.milestoneCaterories}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity onPress={() => setMilestoneCatory('All')}>
+            <Text
+              style={
+                milestonCatory === 'All'
+                  ? styles.milestoneCategoryTextActive
+                  : styles.milestoneCategoryText
+              }>
+              All
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setMilestoneCatory('Overview')}>
+            <Text
+              style={
+                milestonCatory === 'Overview'
+                  ? styles.milestoneCategoryTextActive
+                  : styles.milestoneCategoryText
+              }>
+              Overview
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setMilestoneCatory('Hotels')}>
+            <Text
+              style={
+                milestonCatory === 'Hotels'
+                  ? styles.milestoneCategoryTextActive
+                  : styles.milestoneCategoryText
+              }>
+              Hotels
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setMilestoneCatory('Food')}>
+            <Text
+              style={
+                milestonCatory === 'Food'
+                  ? styles.milestoneCategoryTextActive
+                  : styles.milestoneCategoryText
+              }>
+              Food
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setMilestoneCatory('Memes')}>
+            <Text
+              style={
+                milestonCatory === 'Memes'
+                  ? styles.milestoneCategoryTextActive
+                  : styles.milestoneCategoryText
+              }>
+              Memes
+            </Text>
+          </TouchableOpacity>
+        </ScrollView>
+        <View style={styles.milestoneTextDiv}>
+          <Text style={styles.milestoneText}>At First</Text>
+          <Text style={styles.milestonepara}>
+            Let's figure out how much I spent on this trip of money and time,
+            and then the story begins.
           </Text>
-          <View style={styles.exploreProfilediv}>
-            <Image
-              style={styles.explorePofile}
-              source={require('../assets/images/ProfileImg.png')}
-            />
-            <Text style={styles.explorePofileName}>Leslie Alexander</Text>
+          <View style={styles.milestoneDiv}>
+            <View style={styles.milestoneIcondiv}>
+              <Image
+                style={styles.milestoneIcon}
+                source={require('../assets/images/Location.png')}
+              />
+              <Text style={styles.milestoneIconName}>Pondy</Text>
+            </View>
+            <View style={styles.milestoneIcondiv}>
+              <Image
+                style={styles.milestoneIcon}
+                source={require('../assets/images/Heart.png')}
+              />
+              <Text style={styles.milestoneIconName}>2200 likes</Text>
+            </View>
+            <View style={styles.milestoneIcondiv}>
+              <Image
+                style={styles.milestoneIcon}
+                source={require('../assets/images/Show.png')}
+              />
+              <Text style={styles.milestoneIconName}>1123 view</Text>
+            </View>
           </View>
         </View>
-        <Image source={require('../assets/images/Like.png')} />
+        <ScrollView>
+          <View style={styles.milestoneLocationDiv}>
+            <ScrollView style={styles.milestoneLocationInnerDiv}>
+              <MilestoneLocationCard
+                image={require('../assets/images/Crown.png')}
+                title="Crown 5"
+                price="$12.99"
+              />
+            </ScrollView>
+            <ScrollView style={styles.milestoneLocationInnerDiv}>
+              <MilestoneLocationCard
+                image={require('../assets/images/HotelGreen.png')}
+                title="HoteGreen"
+                price="$12.99"
+              />
+              <MilestoneLocationCard
+                image={require('../assets/images/location3.png')}
+                title="Crown 5"
+                price="$12.99"
+              />
+            </ScrollView>
+          </View>
+        </ScrollView>
       </View>
-      <ScrollView
-        style={styles.milestoneCaterories}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}>
-        <TouchableOpacity onPress={() => setMilestoneCatory('All')}>
-          <Text
-            style={
-              milestonCatory === 'All'
-                ? styles.milestoneCategoryTextActive
-                : styles.milestoneCategoryText
-            }>
-            All
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMilestoneCatory('Overview')}>
-          <Text
-            style={
-              milestonCatory === 'Overview'
-                ? styles.milestoneCategoryTextActive
-                : styles.milestoneCategoryText
-            }>
-            Overview
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMilestoneCatory('Hotels')}>
-          <Text
-            style={
-              milestonCatory === 'Hotels'
-                ? styles.milestoneCategoryTextActive
-                : styles.milestoneCategoryText
-            }>
-            Hotels
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMilestoneCatory('Food')}>
-          <Text
-            style={
-              milestonCatory === 'Food'
-                ? styles.milestoneCategoryTextActive
-                : styles.milestoneCategoryText
-            }>
-            Food
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMilestoneCatory('Memes')}>
-          <Text
-            style={
-              milestonCatory === 'Memes'
-                ? styles.milestoneCategoryTextActive
-                : styles.milestoneCategoryText
-            }>
-            Memes
-          </Text>
-        </TouchableOpacity>
-      </ScrollView>
-      <View style={styles.milestoneTextDiv}>
-        <Text style={styles.milestoneText}>At First</Text>
-        <Text style={styles.milestonepara}>
-          Let's figure out how much I spent on this trip of money and time, and
-          then the story begins.
-        </Text>
-        <View style={styles.milestoneDiv}>
-          <View style={styles.milestoneIcondiv}>
-            <Image
-              style={styles.milestoneIcon}
-              source={require('../assets/images/Location.png')}
-            />
-            <Text style={styles.milestoneIconName}>Pondy</Text>
-          </View>
-          <View style={styles.milestoneIcondiv}>
-            <Image
-              style={styles.milestoneIcon}
-              source={require('../assets/images/Heart.png')}
-            />
-            <Text style={styles.milestoneIconName}>2200 likes</Text>
-          </View>
-          <View style={styles.milestoneIcondiv}>
-            <Image
-              style={styles.milestoneIcon}
-              source={require('../assets/images/Show.png')}
-            />
-            <Text style={styles.milestoneIconName}>1123 view</Text>
-          </View>
-        </View>
-      </View>
-      <ScrollView>
-        <View style={styles.milestoneLocationDiv}>
-          <ScrollView style={styles.milestoneLocationInnerDiv}>
-            <MilestoneLocationCard
-              image={require('../assets/images/Crown.png')}
-              title="Crown 5"
-              price="$12.99"
-            />
-          </ScrollView>
-          <ScrollView style={styles.milestoneLocationInnerDiv}>
-            <MilestoneLocationCard
-              image={require('../assets/images/HotelGreen.png')}
-              title="HoteGreen"
-              price="$12.99"
-            />
-            <MilestoneLocationCard
-              image={require('../assets/images/location3.png')}
-              title="Crown 5"
-              price="$12.99"
-            />
-          </ScrollView>
-        </View>
-      </ScrollView>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -154,7 +157,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  outerContainer: {
+  outerContainer: {},
+  innerContainer: {
     padding: 20,
   },
   backgroundImg: {

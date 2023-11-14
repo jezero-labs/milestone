@@ -6,7 +6,7 @@ import MilestonesCard from '../components/MilestonesCard';
 
 const PlaceDetails = ({navigation}: any) => {
   return (
-    <View style={styles.outterContainer}>
+    <ScrollView style={styles.outterContainer}>
       <View style={styles.topNav}>
         <TouchableOpacity style={styles.navMenu}>
           <Image source={require('../assets/images/arrow.png')} />
@@ -73,7 +73,7 @@ const PlaceDetails = ({navigation}: any) => {
           navigation={navigation}
         />
       </ScrollView>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -23,24 +23,26 @@ const MilestonesCard = ({
   navigation,
 }: MilestoneProps) => {
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Milestone')}
-      style={styles.milsestoneCard}>
-      <Image style={styles.milesrtoneImg} source={image} />
-      <View style={styles.milestoneDiv}>
-        <View>
-          <Text style={styles.milestoneText}>{title}</Text>
-          <View style={styles.milestoneLocationDiv}>
-            <Image
-              style={styles.mapIcon}
-              source={require('../assets/images/map.png')}
-            />
-            <Text>{location}</Text>
+    <View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Milestone')}
+        style={styles.milsestoneCard}>
+        <Image style={styles.milesrtoneImg} source={image} />
+        <View style={styles.milestoneDiv}>
+          <View>
+            <Text style={styles.milestoneText}>{title}</Text>
+            <View style={styles.milestoneLocationDiv}>
+              <Image
+                style={styles.mapIcon}
+                source={require('../assets/images/map.png')}
+              />
+              <Text>{location}</Text>
+            </View>
           </View>
+          <Image source={require('../assets/images/milestonedetail.png')} />
         </View>
-        <Image source={require('../assets/images/milestonedetail.png')} />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

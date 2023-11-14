@@ -4,15 +4,43 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
+  FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import MilestonesCard from '../components/MilestonesCard';
 
+const DATA = [
+  {
+    id: 1,
+    image: require('../assets/images/milestoneImg.png'),
+    title: 'Night life in Pondy',
+    location: 'Wayanad',
+  },
+  {
+    id: 2,
+    image: require('../assets/images/milestoneImg.png'),
+    title: 'Night life in Pondy',
+    location: 'Wayanad',
+  },
+  {
+    id: 3,
+    image: require('../assets/images/milestoneImg.png'),
+    title: 'Night life in Pondy',
+    location: 'Wayanad',
+  },
+  {
+    id: 4,
+    image: require('../assets/images/milestoneImg.png'),
+    title: 'Night life in Pondy',
+    location: 'Wayanad',
+  },
+];
+
 const Explore = ({navigation}: any) => {
   const [locationCategory, setLocationCategory] = useState<string>('All');
   return (
-    <View>
+    <ScrollView>
       <WelcomeComponent
         name={'Kaushik KC'}
         image={require('../assets/images/ProfileImg.png')}
@@ -68,8 +96,21 @@ const Explore = ({navigation}: any) => {
             </Text>
           </TouchableOpacity>
         </ScrollView>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <MilestonesCard
+        <View>
+          <FlatList
+            data={DATA}
+            scrollEnabled={false}
+            renderItem={({item}) => (
+              <MilestonesCard
+                image={item.image}
+                title={item.title}
+                location={item.location}
+                navigation={navigation}
+              />
+            )}
+            // keyExtractor={(item: { id: any; }) => item.id}
+          />
+          {/* <MilestonesCard
             image={require('../assets/images/milestoneImg.png')}
             title="Night life in Pondy"
             location="Wayanad"
@@ -92,10 +133,10 @@ const Explore = ({navigation}: any) => {
             title="Night life in Pondy"
             location="Wayanad"
             navigation={navigation}
-          />
-        </ScrollView>
+          /> */}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -5,7 +5,7 @@ import Home from '../screens/Home';
 import Explore from '../screens/Explore';
 import Marketplace from '../screens/Marketplace';
 import Profile from '../screens/Profile';
-import {Image} from 'react-native';
+import {Image, Text} from 'react-native';
 import {wp} from '../utils/ScreenDimension';
 
 type BottomTabNavigatorParamList = {
@@ -48,17 +48,32 @@ const BottomNavigator = () => {
           tabBarLabel: 'Home',
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
-            <Image
-              source={
-                focused
-                  ? require('../assets/images/home.png')
-                  : require('../assets/images/home.png')
-              }
-              style={{
-                width: 20,
-                height: 20,
-              }}
-            />
+            <>
+              <Image
+                source={
+                  focused
+                    ? require('../assets/images/Home.png')
+                    : require('../assets/images/Home.png')
+                }
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+              <Text
+                style={
+                  focused
+                    ? {
+                        borderBottomWidth: 2,
+                        width: 20,
+                        borderBottomColor: '#fff',
+                        marginTop: -14,
+                      }
+                    : {
+                        height: 0,
+                      }
+                }></Text>
+            </>
           ),
         }}
       />
@@ -69,17 +84,32 @@ const BottomNavigator = () => {
           tabBarShowLabel: false,
           tabBarLabel: 'Explore',
           tabBarIcon: ({focused}) => (
-            <Image
-              source={
-                focused
-                  ? require('../assets/images/explore.png')
-                  : require('../assets/images/explore.png')
-              }
-              style={{
-                width: 20,
-                height: 25,
-              }}
-            />
+            <>
+              <Image
+                source={
+                  focused
+                    ? require('../assets/images/Explore.png')
+                    : require('../assets/images/Explore.png')
+                }
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+              <Text
+                style={
+                  focused
+                    ? {
+                        borderBottomWidth: 2,
+                        width: 20,
+                        borderBottomColor: '#fff',
+                        marginTop: -14,
+                      }
+                    : {
+                        height: 0,
+                      }
+                }></Text>
+            </>
           ),
         }}
       />
@@ -91,17 +121,32 @@ const BottomNavigator = () => {
 
           tabBarLabel: 'Marketplace',
           tabBarIcon: ({focused}) => (
-            <Image
-              source={
-                focused
-                  ? require('../assets/images/marketplace.png')
-                  : require('../assets/images/marketplace.png')
-              }
-              style={{
-                width: 20,
-                height: 20,
-              }}
-            />
+            <>
+              <Image
+                source={
+                  focused
+                    ? require('../assets/images/marketplace.png')
+                    : require('../assets/images/marketplace.png')
+                }
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+              <Text
+                style={
+                  focused
+                    ? {
+                        borderBottomWidth: 2,
+                        width: 20,
+                        borderBottomColor: '#fff',
+                        marginTop: -14,
+                      }
+                    : {
+                        height: 0,
+                      }
+                }></Text>
+            </>
           ),
         }}
       />
@@ -112,17 +157,32 @@ const BottomNavigator = () => {
           tabBarShowLabel: false,
           tabBarLabel: 'Profile',
           tabBarIcon: ({focused}) => (
-            <Image
-              source={
-                focused
-                  ? require('../assets/images/profile.png')
-                  : require('../assets/images/profile.png')
-              }
-              style={{
-                width: 20,
-                height: 20,
-              }}
-            />
+            <>
+              <Image
+                source={
+                  focused
+                    ? require('../assets/images/profile.png')
+                    : require('../assets/images/profile.png')
+                }
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+              <Text
+                style={
+                  focused
+                    ? {
+                        borderBottomWidth: 2,
+                        width: 20,
+                        borderBottomColor: '#fff',
+                        marginTop: -14,
+                      }
+                    : {
+                        height: 0,
+                      }
+                }></Text>
+            </>
           ),
         }}
       />
