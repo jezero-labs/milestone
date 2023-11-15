@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StackParamList} from '.';
 import Home from '../screens/Home';
 import Explore from '../screens/Explore';
-import Marketplace from '../screens/Marketplace';
+// import Marketplace from '../screens/Marketplace';
 import {Image, Text} from 'react-native';
 import {wp} from '../utils/ScreenDimension';
 import Wallet from '../screens/Wallet';
@@ -115,7 +115,7 @@ const BottomNavigator = () => {
           ),
         }}
       />
-      <Bottom.Screen
+      {/* <Bottom.Screen
         name="Marketplace"
         component={Marketplace}
         options={{
@@ -151,7 +151,7 @@ const BottomNavigator = () => {
             </>
           ),
         }}
-      />
+      /> */}
       <Bottom.Screen
         name="Wallet"
         component={Wallet}
@@ -163,8 +163,8 @@ const BottomNavigator = () => {
               <Image
                 source={
                   focused
-                    ? require('../assets/images/profile.png')
-                    : require('../assets/images/profile.png')
+                    ? require('../assets/images/marketplace.png')
+                    : require('../assets/images/marketplace.png')
                 }
                 style={{
                   width: 20,

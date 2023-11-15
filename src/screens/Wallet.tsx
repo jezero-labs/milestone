@@ -60,9 +60,7 @@ const Wallet = () => {
             {acountHumanReadable()}
           </Text>
           <TouchableOpacity>
-            <Text>
-              Show seed Phase
-            </Text>
+            <Text>Show seed Phase</Text>
           </TouchableOpacity>
         </LinearGradient>
         <RewardEarnedCard amount={'8.41'} Inramount={'183.42'} />

@@ -6,9 +6,23 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, {useState} from 'react';
+import {importExistingAccount} from '@rly-network/mobile-sdk';
+import {account} from '../state';
+import {useRecoilState} from 'recoil';
 
 const ImportAccount = () => {
   const [seedphase, setSeedPhase] = useState('');
+  const [, setAccount] = useRecoilState(account);
+
+  const importAccount = async () => {
+    const walletAddress = await importExistingAccount(seedphase);
+    console.log('Address', walletAddress);
+
+    setAccount(walletAddress);
+
+    //@ts-ignore
+    navigation.navigate('Bottom');
+  };
   return (
     <View style={styles.outerDiv}>
       <Text style={styles.heading}>Import Your Existing Account</Text>
@@ -20,7 +34,9 @@ const ImportAccount = () => {
             setSeedPhase(e);
           }}
         />
-        <TouchableOpacity style={styles.AccountBtn}>
+        <TouchableOpacity
+          onPress={() => importAccount()}
+          style={styles.AccountBtn}>
           <Text style={styles.BtnText}>Import Account</Text>
         </TouchableOpacity>
       </View>

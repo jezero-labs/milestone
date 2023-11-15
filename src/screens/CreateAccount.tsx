@@ -26,7 +26,7 @@ const CreateAccount = () => {
     setAccount(rlyAct);
 
     //@ts-ignore
-    navigation.navigate("claimingScreen");
+    navigation.navigate('claimingScreen');
   };
   return (
     <View style={styles.outerDiv}>

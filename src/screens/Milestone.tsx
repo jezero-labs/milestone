@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {wp} from '../utils/ScreenDimension';
 import {ScrollView} from 'react-native-gesture-handler';
 import MilestoneLocationCard from '../components/MilestoneLocationCard';
+import MilestoneDetailCard from '../components/MilestoneDetailCard';
 
 const Milestone = () => {
   const [milestonCatory, setMilestoneCatory] = useState('All');
@@ -49,14 +50,14 @@ const Milestone = () => {
               All
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setMilestoneCatory('Overview')}>
+          <TouchableOpacity onPress={() => setMilestoneCatory('Milestones')}>
             <Text
               style={
-                milestonCatory === 'Overview'
+                milestonCatory === 'Milestones'
                   ? styles.milestoneCategoryTextActive
                   : styles.milestoneCategoryText
               }>
-              Overview
+              Milestones
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setMilestoneCatory('Hotels')}>
@@ -90,59 +91,94 @@ const Milestone = () => {
             </Text>
           </TouchableOpacity>
         </ScrollView>
-        <View style={styles.milestoneTextDiv}>
-          <Text style={styles.milestoneText}>At First</Text>
-          <Text style={styles.milestonepara}>
-            Let's figure out how much I spent on this trip of money and time,
-            and then the story begins.
-          </Text>
-          <View style={styles.milestoneDiv}>
-            <View style={styles.milestoneIcondiv}>
-              <Image
-                style={styles.milestoneIcon}
-                source={require('../assets/images/Location.png')}
-              />
-              <Text style={styles.milestoneIconName}>Pondy</Text>
+        {milestonCatory === 'All' && (
+          <>
+            <View style={styles.milestoneTextDiv}>
+              <Text style={styles.milestoneText}>At First</Text>
+              <Text style={styles.milestonepara}>
+                Let's figure out how much I spent on this trip of money and
+                time, and then the story begins.
+              </Text>
+              <View style={styles.milestoneDiv}>
+                <View style={styles.milestoneIcondiv}>
+                  <Image
+                    style={styles.milestoneIcon}
+                    source={require('../assets/images/Location.png')}
+                  />
+                  <Text style={styles.milestoneIconName}>Pondy</Text>
+                </View>
+                <View style={styles.milestoneIcondiv}>
+                  <Image
+                    style={styles.milestoneIcon}
+                    source={require('../assets/images/Heart.png')}
+                  />
+                  <Text style={styles.milestoneIconName}>2200 likes</Text>
+                </View>
+                <View style={styles.milestoneIcondiv}>
+                  <Image
+                    style={styles.milestoneIcon}
+                    source={require('../assets/images/Show.png')}
+                  />
+                  <Text style={styles.milestoneIconName}>1123 view</Text>
+                </View>
+              </View>
             </View>
-            <View style={styles.milestoneIcondiv}>
-              <Image
-                style={styles.milestoneIcon}
-                source={require('../assets/images/Heart.png')}
-              />
-              <Text style={styles.milestoneIconName}>2200 likes</Text>
-            </View>
-            <View style={styles.milestoneIcondiv}>
-              <Image
-                style={styles.milestoneIcon}
-                source={require('../assets/images/Show.png')}
-              />
-              <Text style={styles.milestoneIconName}>1123 view</Text>
-            </View>
-          </View>
-        </View>
-        <ScrollView>
-          <View style={styles.milestoneLocationDiv}>
-            <ScrollView style={styles.milestoneLocationInnerDiv}>
-              <MilestoneLocationCard
-                image={require('../assets/images/Crown.png')}
-                title="Crown 5"
-                price="$12.99"
-              />
+            <ScrollView>
+              <View style={styles.milestoneLocationDiv}>
+                <ScrollView style={styles.milestoneLocationInnerDiv}>
+                  <MilestoneLocationCard
+                    image={require('../assets/images/Crown.png')}
+                    title="Crown 5"
+                    price="$12.99"
+                  />
+                </ScrollView>
+                <ScrollView style={styles.milestoneLocationInnerDiv}>
+                  <MilestoneLocationCard
+                    image={require('../assets/images/HotelGreen.png')}
+                    title="HoteGreen"
+                    price="$12.99"
+                  />
+                  <MilestoneLocationCard
+                    image={require('../assets/images/location3.png')}
+                    title="Crown 5"
+                    price="$12.99"
+                  />
+                </ScrollView>
+              </View>
             </ScrollView>
-            <ScrollView style={styles.milestoneLocationInnerDiv}>
-              <MilestoneLocationCard
-                image={require('../assets/images/HotelGreen.png')}
-                title="HoteGreen"
-                price="$12.99"
+          </>
+        )}
+        {milestonCatory === 'Overview' && (
+          <>
+            <View>
+              <Text style={styles.milestonepara}>
+                Let's figure out how much I spent on this trip of money and
+                time, and then the story begins.
+              </Text>
+              <MilestoneDetailCard
+                image={require('../assets/images/pondy.png')}
+                title="The Spot"
+                location="White Town"
+                dishes="Sandwich, Burger, Italian, Seafood, South Indian, Desserts, Salad"
+                timing="Opens tomorrow at 12noon"
               />
-              <MilestoneLocationCard
-                image={require('../assets/images/location3.png')}
-                title="Crown 5"
-                price="$12.99"
+              <MilestoneDetailCard
+                image={require('../assets/images/pondy.png')}
+                title="The Spot"
+                location="White Town"
+                dishes="Sandwich, Burger, Italian, Seafood, South Indian, Desserts, Salad"
+                timing="Opens tomorrow at 12noon"
               />
-            </ScrollView>
-          </View>
-        </ScrollView>
+              <MilestoneDetailCard
+                image={require('../assets/images/pondy.png')}
+                title="The Spot"
+                location="White Town"
+                dishes="Sandwich, Burger, Italian, Seafood, South Indian, Desserts, Salad"
+                timing="Opens tomorrow at 12noon"
+              />
+            </View>
+          </>
+        )}
       </View>
     </ScrollView>
   );

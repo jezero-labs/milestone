@@ -8,13 +8,20 @@ import LandingScreen from '../screens/LandingScreen';
 import CreateAccount from '../screens/CreateAccount';
 import ImportAccount from '../screens/ImportAccount';
 import ClaimScreen from '../screens/ClaimScreen';
-import { account } from '../state';
-import { useRecoilState } from 'recoil';
-import { getAccount } from '@rly-network/mobile-sdk';
+import {account} from '../state';
+import {useRecoilState} from 'recoil';
+import {getAccount} from '@rly-network/mobile-sdk';
+import SeedPhase from '../screens/SeedPhase';
 
 export type StackParamList = {
   Bottom: undefined;
   landingScreen: undefined;
+  Place: undefined;
+  Milestone: undefined;
+  claimingScreen: undefined;
+  seedphase: undefined;
+  createAccount: undefined;
+  importAccount: undefined;
 };
 
 const Stack = createStackNavigator<StackParamList>();
@@ -33,13 +40,12 @@ const MyStack = () => {
       }
 
       setAct(rlyAccount);
-
     };
     loadAccount();
   }, [setAct]);
   return (
     <NavigationContainer>
-      {act ? (
+      {hasLoadedAccount && act ? (
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
@@ -47,6 +53,8 @@ const MyStack = () => {
           <Stack.Screen name="Bottom" component={BottomNavigator} />
           <Stack.Screen name="Place" component={PlaceDetails} />
           <Stack.Screen name="Milestone" component={Milestone} />
+          <Stack.Screen name="claimingScreen" component={ClaimScreen} />
+          <Stack.Screen name="seedphase" component={SeedPhase} />
         </Stack.Navigator>
       ) : (
         // eslint-disable-next-line react/react-in-jsx-scope
@@ -58,7 +66,6 @@ const MyStack = () => {
           <Stack.Screen name="landingScreen" component={LandingScreen} />
           <Stack.Screen name="createAccount" component={CreateAccount} />
           <Stack.Screen name="importAccount" component={ImportAccount} />
-          <Stack.Screen name="claimingScreen" component={ClaimScreen} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
