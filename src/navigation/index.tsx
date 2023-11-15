@@ -3,10 +3,14 @@ import BottomNavigator from './BottomNavigation';
 import PlaceDetails from '../screens/PlaceDetails';
 import Milestone from '../screens/Milestone';
 import {NavigationContainer} from '@react-navigation/native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import LandingScreen from '../screens/LandingScreen';
 import CreateAccount from '../screens/CreateAccount';
 import ImportAccount from '../screens/ImportAccount';
+import ClaimScreen from '../screens/ClaimScreen';
+import { account } from '../state';
+import { useRecoilState } from 'recoil';
+import { getAccount } from '@rly-network/mobile-sdk';
 
 export type StackParamList = {
   Bottom: undefined;
@@ -17,9 +21,25 @@ const Stack = createStackNavigator<StackParamList>();
 
 const MyStack = () => {
   const [hasLoadedAccount, setHasLoadedAccount] = useState(false);
+  const [act, setAct] = useRecoilState(account);
+  useEffect(() => {
+    const loadAccount = async () => {
+      const rlyAccount = await getAccount();
+
+      setHasLoadedAccount(true);
+
+      if (!rlyAccount) {
+        return;
+      }
+
+      setAct(rlyAccount);
+
+    };
+    loadAccount();
+  }, [setAct]);
   return (
     <NavigationContainer>
-      {hasLoadedAccount ? (
+      {act ? (
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
@@ -38,6 +58,7 @@ const MyStack = () => {
           <Stack.Screen name="landingScreen" component={LandingScreen} />
           <Stack.Screen name="createAccount" component={CreateAccount} />
           <Stack.Screen name="importAccount" component={ImportAccount} />
+          <Stack.Screen name="claimingScreen" component={ClaimScreen} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

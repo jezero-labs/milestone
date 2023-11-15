@@ -1,38 +1,95 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import LinearGradient from 'react-native-linear-gradient';
 import {wp} from '../utils/ScreenDimension';
+import ProfileCard from '../components/ProfileCard';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {account, userDetails as userDetailsAtom} from '../state';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {permanentlyDeleteAccount} from '@rly-network/mobile-sdk';
 
 const Profile = () => {
+    const userDetails = useRecoilValue(userDetailsAtom);
+  const [rlyAccount, setRlyAccount] = useRecoilState(account);
+  const resetDemo = async () => {
+    await permanentlyDeleteAccount();
+    setRlyAccount(undefined);
+  };
   return (
-    <View>
+    <ScrollView>
       <WelcomeComponent
-        name={'Kaushik KC'}
+        name={userDetails?.name}
         image={require('../assets/images/ProfileImg.png')}
       />
-      <LinearGradient
-        colors={['#848484', '#FFFFFF']}
-        start={{x: 1, y: 0.5}}
-        end={{x: 0, y: 0.5}}
-        style={styles.accountBalCardContainer}>
-        <View style={styles.accInner}>
-          <Text style={styles.accText}>Account Balance</Text>
-          <Text style={styles.accAmount}>0 SOL</Text>
-        </View>
-        <Text style={styles.walletAddress} numberOfLines={1}>
-          AmisgL1W5NjLMPkReYN3KqBwXzLEiZb7GZ5j84UMdoW
-        </Text>
-      </LinearGradient>
-      <Text>Profile</Text>
-    </View>
+      <View style={styles.profileDiv}>
+        <LinearGradient
+          colors={['#848484', '#FFFFFF']}
+          start={{x: 1, y: 0.5}}
+          end={{x: 0, y: 0.5}}
+          style={styles.accountCon}>
+          <View style={styles.accInner}>
+            <View>
+              <Text style={styles.accText}>{userDetails?.name}</Text>
+              <Text style={styles.email}>{userDetails?.email}</Text>
+              <Text>
+                <Text style={styles.notVerify}>Not Verified</Text>
+                <Text style={styles.verifyNow}>Verify Now </Text>
+              </Text>
+            </View>
+          </View>
+        </LinearGradient>
+        <ScrollView>
+          <ProfileCard
+            logo={require('../assets/images/ProfileIcon.png')}
+            name="Information"
+          />
+          <ProfileCard
+            logo={require('../assets/images/ProfileIcon.png')}
+            name="Refer & Earn"
+          />
+          <ProfileCard
+            logo={require('../assets/images/ProfileIcon.png')}
+            name="Support & Chat"
+          />
+          <ProfileCard
+            logo={require('../assets/images/ProfileIcon.png')}
+            name="Privacy Policy"
+          />
+          <ProfileCard
+            logo={require('../assets/images/ProfileIcon.png')}
+            name="Terms & Conditions"
+          />
+          <ProfileCard
+            logo={require('../assets/images/ProfileIcon.png')}
+            name="Logout"
+          />
+        </ScrollView>
+      </View>
+      <TouchableOpacity onPress={() => resetDemo()}>
+        <Text>Delete the account</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  accountBalCardContainer: {
-    width: wp(100) - 32,
+  container: {
+    flex: 1,
+    backgroundColor: '#2D2D30',
+    paddingHorizontal: 16,
+  },
+  header: {
+    marginVertical: 24,
+  },
+  headerTitle: {
+    fontSize: 22,
+    color: '#fff',
+    fontFamily: 'Quicksand-Bold',
+  },
+  accountCon: {
     height: 120,
+    width: wp(100) - 40,
     borderRadius: 16,
     marginBottom: 16,
     padding: 16,
@@ -52,11 +109,32 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 24,
   },
-  walletAddress: {
+  email: {
     color: '#fff',
-    fontSize: 14,
-    fontFamily: 'Quicksand-Regular',
+    marginBottom: 3,
+    marginTop: 3,
   },
+  notVerify: {
+    color: '#D1411E',
+  },
+  verifyNow: {
+    color: '#fff',
+  },
+  profileImg: {
+    width: 70,
+    height: 70,
+    borderRadius: 100,
+  },
+  version: {
+    color: '#fff',
+    opacity: 0.5,
+    marginTop: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  profileDiv:{
+    paddingHorizontal: 20,
+  }
 });
 
 export default Profile;

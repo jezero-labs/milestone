@@ -4,14 +4,16 @@ import {StackParamList} from '.';
 import Home from '../screens/Home';
 import Explore from '../screens/Explore';
 import Marketplace from '../screens/Marketplace';
-import Profile from '../screens/Profile';
 import {Image, Text} from 'react-native';
 import {wp} from '../utils/ScreenDimension';
+import Wallet from '../screens/Wallet';
+import Profile from '../screens/Profile';
 
 type BottomTabNavigatorParamList = {
   Home: StackParamList;
   Explore: undefined;
   Marketplace: undefined;
+  Wallet: undefined;
   Profile: undefined;
 };
 
@@ -127,6 +129,42 @@ const BottomNavigator = () => {
                   focused
                     ? require('../assets/images/marketplace.png')
                     : require('../assets/images/marketplace.png')
+                }
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+              <Text
+                style={
+                  focused
+                    ? {
+                        borderBottomWidth: 2,
+                        width: 18,
+                        borderBottomColor: '#fff',
+                        marginTop: -12,
+                      }
+                    : {
+                        height: 0,
+                      }
+                }></Text>
+            </>
+          ),
+        }}
+      />
+      <Bottom.Screen
+        name="Wallet"
+        component={Wallet}
+        options={{
+          tabBarShowLabel: false,
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({focused}) => (
+            <>
+              <Image
+                source={
+                  focused
+                    ? require('../assets/images/profile.png')
+                    : require('../assets/images/profile.png')
                 }
                 style={{
                   width: 20,

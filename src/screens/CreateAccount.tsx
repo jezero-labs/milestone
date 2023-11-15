@@ -1,10 +1,33 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
-import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, {useState} from 'react';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import {account, userDetails} from '../state';
+import {useRecoilState} from 'recoil';
+import {
+  createAccount as createRlyAccount,
+  getAccount,
+} from '@rly-network/mobile-sdk';
 
 const CreateAccount = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("")
+  const navigation = useNavigation();
+  const [, setUserDetails] = useRecoilState(userDetails);
+  const [, setAccount] = useRecoilState(account);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const createAccount = async () => {
+    setUserDetails({name: name, email: email});
+
+    await createRlyAccount();
+    const rlyAct = await getAccount();
+    console.log('Address', rlyAct);
+
+    setAccount(rlyAct);
+
+    //@ts-ignore
+    navigation.navigate("claimingScreen");
+  };
   return (
     <View style={styles.outerDiv}>
       <Text style={styles.heading}>Create Your Account</Text>
@@ -23,8 +46,10 @@ const CreateAccount = () => {
             setEmail(e);
           }}
         />
-        <TouchableOpacity style={styles.AccountBtn}>
-            <Text style={styles.BtnText}>Create Account</Text>
+        <TouchableOpacity
+          onPress={() => createAccount()}
+          style={styles.AccountBtn}>
+          <Text style={styles.BtnText}>Create Account</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -32,42 +57,42 @@ const CreateAccount = () => {
 };
 
 const styles = StyleSheet.create({
-    textInput: {
-      borderWidth: 1.5,
-      borderColor: '#000000',
-      padding: 8,
-      borderRadius: 8,
-      width: 283,
-      marginBottom: 15
-    },
-    outerDiv: {
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-      },
-      innerDiv:{
-        alignItems: 'center'
-      },
-      AccountBtn: {
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        borderColor: '#132D2F',
-        borderWidth: 2,
-        borderRadius: 20,
-        marginTop: 20,
-      },
-      BtnText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#121212',
-      },
-      heading:{
-        fontWeight: '800',
-        fontSize: 20,
-        color: '#121212',
-        marginBottom: 40
-      }
-  });
+  textInput: {
+    borderWidth: 1.5,
+    borderColor: '#000000',
+    padding: 8,
+    borderRadius: 8,
+    width: 283,
+    marginBottom: 15,
+  },
+  outerDiv: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+  },
+  innerDiv: {
+    alignItems: 'center',
+  },
+  AccountBtn: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderColor: '#132D2F',
+    borderWidth: 2,
+    borderRadius: 20,
+    marginTop: 20,
+  },
+  BtnText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#121212',
+  },
+  heading: {
+    fontWeight: '800',
+    fontSize: 20,
+    color: '#121212',
+    marginBottom: 40,
+  },
+});
 
 export default CreateAccount;

@@ -1,29 +1,55 @@
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
+import React, {useState} from 'react';
+import {useRecoilState, useSetRecoilState} from 'recoil';
+import {balance, errorMessage} from '../state';
+import {useNavigation} from '@react-navigation/native';
+import {RlyNetwork} from '../../App';
 
 const ClaimScreen = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("")
+  const navigation = useNavigation();
+  const [claiming, setClaiming] = useState(false);
+  const [, setBalance] = useRecoilState(balance);
+  const setErrorMessage = useSetRecoilState(errorMessage);
+
+  const claimTokens = async () => {
+    setClaiming(true);
+
+    try {
+      await RlyNetwork.claimRly();
+    } catch (e: any) {
+      setErrorMessage({
+        title: 'Unable to perform claim',
+        body: 'Errow was: ' + e.message,
+      });
+      setClaiming(false);
+    }
+
+    const newBalance = await RlyNetwork.getBalance();
+
+    setBalance(newBalance);
+    setClaiming(false);
+
+    //@ts-ignore
+    navigation.navigate('Bottom');
+  };
   return (
     <View style={styles.outerDiv}>
-      <Text style={styles.heading}>Create Your Account</Text>
+      <Text style={styles.heading}>
+        Congratulations You have created your account{' '}
+      </Text>
+      <Text style={styles.heading}>Claim free RLY token for free!!</Text>
       <View style={styles.innerDiv}>
-        <TextInput
-          placeholder="Name"
-          style={styles.textInput}
-          onChangeText={e => {
-            setName(e);
-          }}
-        />
-        <TextInput
-          placeholder="Email"
-          style={styles.textInput}
-          onChangeText={e => {
-            setEmail(e);
-          }}
-        />
-        <TouchableOpacity style={styles.AccountBtn}>
-            <Text style={styles.BtnText}>Create Account</Text>
+        <TouchableOpacity onPress={claimTokens} style={styles.AccountBtn}>
+          <Text style={styles.BtnText}>Claim Token</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Bottom')}>
+          <Text style={styles.BtnText}>Skip</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -31,42 +57,43 @@ const ClaimScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    textInput: {
-      borderWidth: 1.5,
-      borderColor: '#000000',
-      padding: 8,
-      borderRadius: 8,
-      width: 283,
-      marginBottom: 15
-    },
-    outerDiv: {
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-      },
-      innerDiv:{
-        alignItems: 'center'
-      },
-      AccountBtn: {
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        borderColor: '#132D2F',
-        borderWidth: 2,
-        borderRadius: 20,
-        marginTop: 20,
-      },
-      BtnText: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#121212',
-      },
-      heading:{
-        fontWeight: '800',
-        fontSize: 20,
-        color: '#121212',
-        marginBottom: 40
-      }
-  });
+  textInput: {
+    borderWidth: 1.5,
+    borderColor: '#000000',
+    padding: 8,
+    borderRadius: 8,
+    width: 283,
+    marginBottom: 15,
+  },
+  outerDiv: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+  },
+  innerDiv: {
+    alignItems: 'center',
+  },
+  AccountBtn: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderColor: '#132D2F',
+    borderWidth: 2,
+    borderRadius: 20,
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  BtnText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#121212',
+  },
+  heading: {
+    fontWeight: '800',
+    fontSize: 20,
+    color: '#121212',
+    marginBottom: 40,
+  },
+});
 
 export default ClaimScreen;

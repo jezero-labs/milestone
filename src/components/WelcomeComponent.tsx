@@ -2,7 +2,7 @@ import {View, Text, ImageSourcePropType, Image, StyleSheet} from 'react-native';
 import React from 'react';
 
 type WelcomeProps = {
-  name: string;
+  name: string | undefined;
   image: ImageSourcePropType;
 };
 
