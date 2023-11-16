@@ -13,8 +13,10 @@ import {getAccountPhrase} from '@rly-network/mobile-sdk';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import RewardEarnedCard from '../components/RewardsEarned';
 import HistoryCard from '../components/HistoryCard';
+import { useNavigation } from '@react-navigation/native';
 
 const Wallet = () => {
+  const navigation = useNavigation();
   const userDetails = useRecoilValue(userDetailsAtom);
   const [balance, setBalance] = useRecoilState(balanceState);
   const [rlyAccount, setRlyAccount] = useRecoilState(account);
@@ -59,7 +61,7 @@ const Wallet = () => {
           <Text style={styles.walletAddress} numberOfLines={1}>
             {acountHumanReadable()}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('seedphase')}>
             <Text>Show seed Phase</Text>
           </TouchableOpacity>
         </LinearGradient>
@@ -140,6 +142,7 @@ const styles = StyleSheet.create({
     color: '#121212',
     fontSize: 14,
     fontFamily: 'Quicksand-Regular',
+    marginBottom: 10,
   },
   WalletDiv: {
     paddingHorizontal: 20,

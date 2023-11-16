@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useRecoilState, useSetRecoilState} from 'recoil';
@@ -30,7 +31,7 @@ const ClaimScreen = () => {
       setClaiming(false);
     }
 
-    const newBalance = await RlyNetwork.getBalance();
+    const newBalance = await RlyNetwork.getDisplayBalance();
 
     setBalance(newBalance);
     setClaiming(false);
@@ -48,6 +49,11 @@ const ClaimScreen = () => {
         <TouchableOpacity onPress={claimTokens} style={styles.AccountBtn}>
           <Text style={styles.BtnText}>Claim Token</Text>
         </TouchableOpacity>
+        {claiming && (
+          <View style={{marginTop: 6}}>
+            <ActivityIndicator />
+          </View>
+        )}
         <TouchableOpacity onPress={() => navigation.navigate('Bottom')}>
           <Text style={styles.BtnText}>Skip</Text>
         </TouchableOpacity>

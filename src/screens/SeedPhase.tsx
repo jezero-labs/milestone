@@ -21,7 +21,7 @@ const SeedPhase = () => {
   }, [didConfirm]);
   return (
     <View>
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{alignItems: 'center'}}>
         <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 96}}>
           Never disclose your seed phrase.
         </Text>

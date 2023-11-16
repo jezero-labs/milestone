@@ -7,14 +7,18 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {importExistingAccount} from '@rly-network/mobile-sdk';
-import {account} from '../state';
+import {account, userDetails} from '../state';
 import {useRecoilState} from 'recoil';
 
 const ImportAccount = () => {
   const [seedphase, setSeedPhase] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [, setUserDetails] = useRecoilState(userDetails);
   const [, setAccount] = useRecoilState(account);
 
   const importAccount = async () => {
+    setUserDetails({name: name, email: email});
     const walletAddress = await importExistingAccount(seedphase);
     console.log('Address', walletAddress);
 
@@ -27,6 +31,20 @@ const ImportAccount = () => {
     <View style={styles.outerDiv}>
       <Text style={styles.heading}>Import Your Existing Account</Text>
       <View style={styles.innerDiv}>
+      <TextInput
+          placeholder="Name"
+          style={styles.textInput}
+          onChangeText={e => {
+            setName(e);
+          }}
+        />
+        <TextInput
+          placeholder="Email"
+          style={styles.textInput}
+          onChangeText={e => {
+            setEmail(e);
+          }}
+        />
         <TextInput
           placeholder="Enter you Seed Phase"
           style={styles.textInput}

@@ -5,7 +5,7 @@ export const account = atom<string | undefined>({
   default: undefined,
 });
 
-export const balance = atom<number | undefined>({
+export const balance = atom<number | undefined | string>({
   key: 'rlyBalance',
   default: undefined,
 });

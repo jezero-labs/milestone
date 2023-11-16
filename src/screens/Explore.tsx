@@ -9,6 +9,8 @@ import {
 import React, {useState} from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import MilestonesCard from '../components/MilestonesCard';
+import {useRecoilValue} from 'recoil';
+import {userDetails as userDetailsAtom} from '../state';
 
 const DATA = [
   {
@@ -38,11 +40,12 @@ const DATA = [
 ];
 
 const Explore = ({navigation}: any) => {
+  const userDetails = useRecoilValue(userDetailsAtom);
   const [locationCategory, setLocationCategory] = useState<string>('All');
   return (
     <ScrollView>
       <WelcomeComponent
-        name={'Kaushik KC'}
+        name={userDetails?.name}
         image={require('../assets/images/ProfileImg.png')}
       />
       <View style={styles.exploreDiv}>

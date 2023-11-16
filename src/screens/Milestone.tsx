@@ -148,7 +148,7 @@ const Milestone = () => {
             </ScrollView>
           </>
         )}
-        {milestonCatory === 'Overview' && (
+        {milestonCatory === 'Milestones' && (
           <>
             <View>
               <Text style={styles.milestonepara}>
@@ -263,8 +263,11 @@ const styles = StyleSheet.create({
   },
   milestonepara: {
     width: wp(100) - 40,
-    fontSize: 15,
+    fontSize: 16,
     color: 'rgba(8, 20, 20, 0.60)',
+    marginVertical: 15,
+    lineHeight: 22,
+    fontWeight: '500',
   },
   milestoneDiv: {
     flexDirection: 'row',

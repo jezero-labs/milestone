@@ -66,9 +66,9 @@ const Profile = () => {
           />
         </ScrollView>
       </View>
-      <TouchableOpacity onPress={() => resetDemo()}>
+      {/* <TouchableOpacity onPress={() => resetDemo()}>
         <Text>Delete the account</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ScrollView>
   );
 };

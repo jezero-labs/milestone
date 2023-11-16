@@ -13,6 +13,8 @@ import LocationCard from '../components/LocationCard';
 import {wp} from '../utils/ScreenDimension';
 import LocationCategoryCard from '../components/LocationCategoryCard';
 import CitiesCard from '../components/CitiesCard';
+import {useRecoilValue} from 'recoil';
+import {userDetails as userDetailsAtom} from '../state';
 
 const data = [
   {
@@ -60,6 +62,7 @@ const data = [
 const Home = ({navigation}: any) => {
   const flatlistRef: any = useRef();
   const screenWidth = Dimensions.get('window').width;
+  const userDetails = useRecoilValue(userDetailsAtom);
   const [activeIndex, setActiveIndex] = useState(0);
   const [choosedLocation, setChoosedLocation] = useState<boolean>(false);
   const [locationCategory, setLocationCategory] = useState<string>('All');
@@ -118,7 +121,7 @@ const Home = ({navigation}: any) => {
   return (
     <ScrollView>
       <WelcomeComponent
-        name={'Kaushik KC'}
+        name={userDetails?.name}
         image={require('../assets/images/ProfileImg.png')}
       />
       {choosedLocation ? (
