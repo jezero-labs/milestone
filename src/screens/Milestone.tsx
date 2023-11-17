@@ -53,11 +53,11 @@ const Milestone = () => {
           <TouchableOpacity onPress={() => setMilestoneCatory('Milestones')}>
             <Text
               style={
-                milestonCatory === 'Milestones'
+                milestonCatory === 'Activity'
                   ? styles.milestoneCategoryTextActive
                   : styles.milestoneCategoryText
               }>
-              Milestones
+              Activity
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setMilestoneCatory('Hotels')}>
@@ -148,7 +148,7 @@ const Milestone = () => {
             </ScrollView>
           </>
         )}
-        {milestonCatory === 'Milestones' && (
+        {milestonCatory === 'Activity' && (
           <>
             <View>
               <Text style={styles.milestonepara}>

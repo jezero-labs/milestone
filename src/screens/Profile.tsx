@@ -4,13 +4,12 @@ import WelcomeComponent from '../components/WelcomeComponent';
 import LinearGradient from 'react-native-linear-gradient';
 import {wp} from '../utils/ScreenDimension';
 import ProfileCard from '../components/ProfileCard';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {account, userDetails as userDetailsAtom} from '../state';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {permanentlyDeleteAccount} from '@rly-network/mobile-sdk';
 
 const Profile = () => {
-    const userDetails = useRecoilValue(userDetailsAtom);
+  const userDetails = useRecoilValue(userDetailsAtom);
   const [rlyAccount, setRlyAccount] = useRecoilState(account);
   const resetDemo = async () => {
     await permanentlyDeleteAccount();
@@ -132,9 +131,9 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-  profileDiv:{
+  profileDiv: {
     paddingHorizontal: 20,
-  }
+  },
 });
 
 export default Profile;
