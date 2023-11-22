@@ -2,17 +2,19 @@ import {View, Text, TextInput, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
-import {account, userDetails} from '../state';
+import {account, seedPhase, userDetails} from '../state';
 import {useRecoilState} from 'recoil';
 import {
   createAccount as createRlyAccount,
   getAccount,
+  getAccountPhrase,
 } from '@rly-network/mobile-sdk';
 
 const CreateAccount = () => {
   const navigation = useNavigation();
   const [, setUserDetails] = useRecoilState(userDetails);
   const [, setAccount] = useRecoilState(account);
+  const [, setSeedPhase] = useRecoilState(seedPhase);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
@@ -22,8 +24,11 @@ const CreateAccount = () => {
     await createRlyAccount();
     const rlyAct = await getAccount();
     console.log('Address', rlyAct);
-
+    const tmpSeed = await getAccountPhrase();
     setAccount(rlyAct);
+    if (tmpSeed != null && tmpSeed != undefined) {
+      setSeedPhase(tmpSeed);
+    }
 
     //@ts-ignore
     navigation.navigate('claimingScreen');

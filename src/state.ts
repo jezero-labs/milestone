@@ -19,3 +19,8 @@ export const errorMessage = atom<{title: string; body: string} | undefined>({
   key: 'errorMessage',
   default: undefined,
 });
+
+export const seedPhase = atom<string>({
+  key: 'seedphase',
+  default: undefined,
+});
