@@ -61,7 +61,12 @@ const PlaceDetails = ({navigation}: any) => {
           source={require('../assets/images/story3.png')}
         />
       </ScrollView>
+      <TouchableOpacity onPress={() => navigation.navigate('createMilestone')} style={styles.milestoneDiv}>
       <Text style={styles.milestoneText}>Milestones</Text>
+      <View style={styles.createMilestone}>
+        <Text>+</Text>
+      </View>
+      </TouchableOpacity>
       <ScrollView>
         <MilestonesCard
           image={require('../assets/images/milestoneImg.png')}
@@ -76,6 +81,7 @@ const PlaceDetails = ({navigation}: any) => {
           navigation={navigation}
         />
       </ScrollView>
+      
     </ScrollView>
   );
 };
@@ -145,6 +151,22 @@ const styles = StyleSheet.create({
     height: 14,
     width: 12,
   },
+  milestoneDiv:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    alignItems: 'center'
+  },
+  createMilestone:{
+    marginRight: 10,
+    width: 30,
+    height: 30,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#121212',
+    borderWidth: 2,
+  }
 });
 
 export default PlaceDetails;

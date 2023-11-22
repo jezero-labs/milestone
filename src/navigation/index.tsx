@@ -12,6 +12,7 @@ import {account} from '../state';
 import {useRecoilState} from 'recoil';
 import {getAccount} from '@rly-network/mobile-sdk';
 import SeedPhase from '../screens/SeedPhase';
+import CreateMilestone from '../screens/CreateMilestone';
 
 export type StackParamList = {
   Bottom: undefined;
@@ -55,6 +56,7 @@ const MyStack = () => {
           <Stack.Screen name="Milestone" component={Milestone} />
           <Stack.Screen name="claimingScreen" component={ClaimScreen} />
           <Stack.Screen name="seedphase" component={SeedPhase} />
+          <Stack.Screen name="createMilestone" component={CreateMilestone} />
         </Stack.Navigator>
       ) : (
         // eslint-disable-next-line react/react-in-jsx-scope
