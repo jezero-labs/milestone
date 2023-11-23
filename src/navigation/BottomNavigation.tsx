@@ -1,4 +1,6 @@
-/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StackParamList} from '.';
 import Home from '../screens/Home';
@@ -21,7 +23,6 @@ const Bottom = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
 const BottomNavigator = () => {
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <Bottom.Navigator
       screenOptions={{
         headerShown: false,
@@ -48,7 +49,7 @@ const BottomNavigator = () => {
         options={{
           tabBarShowLabel: false,
           tabBarLabel: 'Home',
-          // eslint-disable-next-line react/no-unstable-nested-components
+
           tabBarIcon: ({focused}) => (
             <>
               <Image
@@ -74,7 +75,8 @@ const BottomNavigator = () => {
                     : {
                         height: 0,
                       }
-                }></Text>
+                }
+              />
             </>
           ),
         }}
@@ -110,7 +112,8 @@ const BottomNavigator = () => {
                     : {
                         height: 0,
                       }
-                }></Text>
+                }
+              />
             </>
           ),
         }}
@@ -183,7 +186,8 @@ const BottomNavigator = () => {
                     : {
                         height: 0,
                       }
-                }></Text>
+                }
+              />
             </>
           ),
         }}
@@ -219,7 +223,8 @@ const BottomNavigator = () => {
                     : {
                         height: 0,
                       }
-                }></Text>
+                }
+              />
             </>
           ),
         }}

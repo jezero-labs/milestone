@@ -3,7 +3,7 @@ import BottomNavigator from './BottomNavigation';
 import PlaceDetails from '../screens/PlaceDetails';
 import Milestone from '../screens/Milestone';
 import {NavigationContainer} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LandingScreen from '../screens/LandingScreen';
 import CreateAccount from '../screens/CreateAccount';
 import ImportAccount from '../screens/ImportAccount';
@@ -23,6 +23,7 @@ export type StackParamList = {
   seedphase: undefined;
   createAccount: undefined;
   importAccount: undefined;
+  createMilestone: undefined;
 };
 
 const Stack = createStackNavigator<StackParamList>();
@@ -59,7 +60,6 @@ const MyStack = () => {
           <Stack.Screen name="createMilestone" component={CreateMilestone} />
         </Stack.Navigator>
       ) : (
-        // eslint-disable-next-line react/react-in-jsx-scope
         <Stack.Navigator
           initialRouteName="landingScreen"
           screenOptions={{

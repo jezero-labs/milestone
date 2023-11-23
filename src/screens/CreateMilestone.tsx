@@ -32,20 +32,22 @@ const CreateMilestone = () => {
   const TempSeed: string = seedphase;
 
   // console.log(TempSeed,"seedTemp")
-  const provider = new ethers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
+  const provider = new ethers.JsonRpcProvider(
+    'https://rpc-mumbai.maticvigil.com/',
+  );
 
   const wallet = ethers.Wallet.fromPhrase(TempSeed, provider);
 
   // Instantiate the smart contract
   const MilestoneContract = new ethers.Contract(
-      CONTACT_ADDRESS,
-      CONTACT_ABI,
-      wallet,
+    CONTACT_ADDRESS,
+    CONTACT_ABI,
+    wallet,
   );
 
   const gasPrice = ethers.parseUnits('30', 'gwei'); // Replace with your desired gas price
   const gasLimit = 300000; // Replace with your desired gas limit
-  
+
   const uri = 'http://ipfs.com/kaushik1734';
 
   const createMilestone = async () => {

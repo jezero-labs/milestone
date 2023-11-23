@@ -68,7 +68,7 @@ const Home = ({navigation}: any) => {
   const [locationCategory, setLocationCategory] = useState<string>('All');
 
   useEffect(() => {
-    if (choosedLocation == false) {
+    if (choosedLocation === false) {
       let interval = setInterval(() => {
         if (Math.round(activeIndex) === data.length - 1) {
           flatlistRef.current.scrollToIndex({
@@ -87,13 +87,13 @@ const Home = ({navigation}: any) => {
     }
   });
 
-  const getItemLayout = (data: any, index: any) => ({
+  const getItemLayout = (index: any) => ({
     length: screenWidth,
     offset: screenWidth * index, // for first image - 300 * 0 = 0pixels, 300 * 1 = 300, 300*2 = 600
     index: index,
   });
 
-  const renderItem = ({item, index}: any) => {
+  const renderItem = ({item}: any) => {
     return (
       <View>
         <Image source={item.backgroundImg} style={styles.exploreImage} />
@@ -110,11 +110,8 @@ const Home = ({navigation}: any) => {
   };
 
   const handleScroll = (event: any) => {
-    // Get the scroll position
     const scrollPosition = event.nativeEvent.contentOffset.x;
-
     const index = scrollPosition / screenWidth;
-
     setActiveIndex(index);
   };
 
@@ -267,12 +264,12 @@ const Home = ({navigation}: any) => {
             <FlatList
               data={data}
               ref={flatlistRef}
-              getItemLayout={getItemLayout}
+              // getItemLayout={getItemLayout}
               keyExtractor={(item: any) => item.id}
               renderItem={renderItem}
               horizontal={true}
               pagingEnabled={true}
-              onScroll={handleScroll}
+              // onScroll={handleScroll}
             />
           </View>
         </View>
