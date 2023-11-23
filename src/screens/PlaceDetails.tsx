@@ -33,7 +33,7 @@ const PlaceDetails = ({navigation}: any) => {
             <Image source={require('../assets/images/share.png')} />
             <Image
               style={styles.shareIcon}
-              source={require('../assets/images/heart.png')}
+              source={require('../assets/images/heartWhite.png')}
             />
           </View>
         </View>

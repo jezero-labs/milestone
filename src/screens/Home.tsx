@@ -231,12 +231,12 @@ const Home = ({navigation}: any) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
               <LocationCard
-                image={require('../assets/images/india.png')}
+                image={require('../assets/images/indiaSmall.png')}
                 location={'India'}
                 setChoosedLocation={setChoosedLocation}
               />
               <LocationCard
-                image={require('../assets/images/turkey.png')}
+                image={require('../assets/images/turkeySmall.png')}
                 location={'Turkey'}
                 setChoosedLocation={setChoosedLocation}
               />
@@ -246,7 +246,7 @@ const Home = ({navigation}: any) => {
                 setChoosedLocation={setChoosedLocation}
               />
               <LocationCard
-                image={require('../assets/images/italy.png')}
+                image={require('../assets/images/italySmall.png')}
                 location={'Italy'}
                 setChoosedLocation={setChoosedLocation}
               />
