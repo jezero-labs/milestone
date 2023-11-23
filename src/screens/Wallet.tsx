@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import LinearGradient from 'react-native-linear-gradient';
 import {wp} from '../utils/ScreenDimension';
@@ -14,6 +14,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import RewardEarnedCard from '../components/RewardsEarned';
 import HistoryCard from '../components/HistoryCard';
 import { useNavigation } from '@react-navigation/native';
+import { RlyNetwork } from '../../App';
 
 const Wallet = () => {
   const navigation = useNavigation();
@@ -30,6 +31,8 @@ const Wallet = () => {
       rlyAccount.length - 3,
       rlyAccount.length,
     );
+    console.log(rlyAccount);
+    console.log(balance);
     return `${rlyAccount}`;
 
     // return `${firstChars}...${lastChars}`;
@@ -42,6 +45,16 @@ const Wallet = () => {
     const tmpSeed = await getAccountPhrase();
     console.log(tmpSeed);
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    (async () => {
+      const newBalance = await RlyNetwork.getDisplayBalance('');
+
+      setBalance(newBalance);
+    })();
+  }, []);
+
   return (
     <ScrollView>
       <WelcomeComponent

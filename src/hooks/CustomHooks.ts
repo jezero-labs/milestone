@@ -10,11 +10,13 @@
 //   return TempSeed;
 // };
 
-// const wallet = ethers.Wallet.fromPhrase(GetSeedPhase());
+// export const wallet = ethers.Wallet.fromPhrase(GetSeedPhase());
 
 // // Instantiate the smart contract
-// const MilestoneContract = new ethers.Contract(
+// export const MilestoneContract = new ethers.Contract(
 //   CONTACT_ADDRESS,
 //   CONTACT_ABI,
 //   wallet,
 // );
+
+// console.log(MilestoneContract);

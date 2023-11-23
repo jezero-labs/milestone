@@ -7,6 +7,7 @@ import ProfileCard from '../components/ProfileCard';
 import {account, userDetails as userDetailsAtom} from '../state';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {permanentlyDeleteAccount} from '@rly-network/mobile-sdk';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Profile = () => {
   const userDetails = useRecoilValue(userDetailsAtom);
@@ -65,9 +66,9 @@ const Profile = () => {
           />
         </ScrollView>
       </View>
-      {/* <TouchableOpacity onPress={() => resetDemo()}>
+      <TouchableOpacity onPress={() => resetDemo()}>
         <Text>Delete the account</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </ScrollView>
   );
 };

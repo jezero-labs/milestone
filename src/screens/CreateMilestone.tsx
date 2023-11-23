@@ -2,6 +2,10 @@ import {View, Text, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+import {ethers} from 'ethers';
+import {useRecoilState} from 'recoil';
+import {seedPhase} from '../state';
+import {CONTACT_ABI, CONTACT_ADDRESS} from '../context/config';
 
 const CreateMilestone = () => {
   const navigation = useNavigation();
@@ -12,8 +16,61 @@ const CreateMilestone = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [cover, setCover] = useState('');
+  const randomNumber = 684;
+  const nftData = {
+    geography,
+    location,
+    geoTag,
+    user,
+    title,
+    description,
+    cover,
+    randomNumber,
+  };
+  const [seedphase, setSeedPhase] = useRecoilState(seedPhase);
+  // console.log(seedPhase,"seed")
+  const TempSeed: string = seedphase;
 
-  const createMilestone = () => {
+  // console.log(TempSeed,"seedTemp")
+  const provider = new ethers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
+
+  const wallet = ethers.Wallet.fromPhrase(TempSeed, provider);
+
+  // Instantiate the smart contract
+  const MilestoneContract = new ethers.Contract(
+      CONTACT_ADDRESS,
+      CONTACT_ABI,
+      wallet,
+  );
+
+  const gasPrice = ethers.parseUnits('30', 'gwei'); // Replace with your desired gas price
+  const gasLimit = 300000; // Replace with your desired gas limit
+  
+  const uri = 'http://ipfs.com/kaushik1734';
+
+  const createMilestone = async () => {
+    const transactionObject: ethers.TransactionRequest =
+      await MilestoneContract.safeMint(uri, nftData, {
+        value: ethers.parseEther('0.01'),
+        gasPrice: gasPrice,
+        gasLimit: gasLimit, // Adjust the value based on your _basePrice
+      });
+    // Sign the transaction
+    // const signedTransaction = await wallet.signTransaction(transactionObject);
+    try {
+      const transactionReceipt = await wallet.sendTransaction(
+        transactionObject,
+      );
+      console.log('Transaction Receipt:', transactionReceipt);
+    } catch (error: any) {
+      console.error('Transaction failed:', error.message);
+      // If available, log the revert reason
+      if (error.data) {
+        console.error('Revert Reason:', ethers.toUtf8String(error.data));
+      }
+    }
+
+    // Handle the transaction receipt or errors
     navigation.navigate('Place');
   };
   return (
