@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import WelcomeComponent from '../components/WelcomeComponent';
 import LinearGradient from 'react-native-linear-gradient';
 import {wp} from '../utils/ScreenDimension';
@@ -13,8 +13,8 @@ import {getAccountPhrase} from '@rly-network/mobile-sdk';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import RewardEarnedCard from '../components/RewardsEarned';
 import HistoryCard from '../components/HistoryCard';
-import { useNavigation } from '@react-navigation/native';
-import { RlyNetwork } from '../../App';
+import {useNavigation} from '@react-navigation/native';
+import {RlyNetwork} from '../../App';
 
 const Wallet = () => {
   const navigation = useNavigation();
@@ -46,7 +46,6 @@ const Wallet = () => {
     console.log(tmpSeed);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     (async () => {
       const newBalance = await RlyNetwork.getDisplayBalance('');

@@ -31,7 +31,7 @@ const ImportAccount = () => {
     <View style={styles.outerDiv}>
       <Text style={styles.heading}>Import Your Existing Account</Text>
       <View style={styles.innerDiv}>
-      <TextInput
+        <TextInput
           placeholder="Name"
           style={styles.textInput}
           onChangeText={e => {

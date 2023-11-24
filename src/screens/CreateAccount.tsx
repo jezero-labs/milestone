@@ -26,7 +26,7 @@ const CreateAccount = () => {
     console.log('Address', rlyAct);
     const tmpSeed = await getAccountPhrase();
     setAccount(rlyAct);
-    if (tmpSeed != null && tmpSeed != undefined) {
+    if (tmpSeed != null && tmpSeed !== undefined) {
       setSeedPhase(tmpSeed);
     }
 

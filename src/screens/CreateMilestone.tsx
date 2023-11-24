@@ -1,13 +1,15 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import {ethers} from 'ethers';
 import {useRecoilState} from 'recoil';
-import {seedPhase} from '../state';
+// import {seedPhase} from '../state';
+import {getAccountPhrase} from '@rly-network/mobile-sdk';
 import {CONTACT_ABI, CONTACT_ADDRESS} from '../context/config';
 
 const CreateMilestone = () => {
+  const [didConfirm, setDidConfirm] = useState(false);
   const navigation = useNavigation();
   const [geography, setGeography] = useState('');
   const [location, setLocation] = useState('');
@@ -16,6 +18,20 @@ const CreateMilestone = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [cover, setCover] = useState('');
+  const [seed, setSeed] = useState<undefined | null | string>();
+
+  useEffect(() => {
+    const doAsyncWork = async () => {
+      if (!didConfirm) {
+        return;
+      }
+
+      const tmpSeed = await getAccountPhrase();
+      setSeed(tmpSeed);
+    };
+    doAsyncWork();
+  }, [didConfirm]);
+
   const randomNumber = 684;
   const nftData = {
     geography,
@@ -27,9 +43,9 @@ const CreateMilestone = () => {
     cover,
     randomNumber,
   };
-  const [seedphase, setSeedPhase] = useRecoilState(seedPhase);
+  // const [seedphase, setSeedPhase] = useRecoilState(seedPhase);
   // console.log(seedPhase,"seed")
-  const TempSeed: string = seedphase;
+  const TempSeed = seed;
 
   // console.log(TempSeed,"seedTemp")
   const provider = new ethers.JsonRpcProvider(
